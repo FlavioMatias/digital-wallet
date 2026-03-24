@@ -16,6 +16,8 @@ public record Money(BigDecimal amount) {
         return new Money(BigDecimal.valueOf(value));
     }
 
+    public static Money zero() {return new Money(java.math.BigDecimal.ZERO);}
+
     public boolean isGreaterThanZero() {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }
@@ -23,6 +25,8 @@ public record Money(BigDecimal amount) {
     public boolean isLessThan(Money other) {
         return this.amount.compareTo(other.amount) < 0;
     }
+
+    public boolean isLessThanOrEqualToZero() {return this.amount.compareTo(java.math.BigDecimal.ZERO) <= 0;}
 
     public Money subtract(Money other) {
         return new Money(this.amount.subtract(other.amount));
