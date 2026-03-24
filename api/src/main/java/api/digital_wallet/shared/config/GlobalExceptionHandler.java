@@ -1,5 +1,6 @@
 package api.digital_wallet.shared.config;
 
+import api.digital_wallet.modules.finance.exception.FinanceDomainException;
 import api.digital_wallet.shared.exceptions.BusinessException;
 import api.digital_wallet.shared.exceptions.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +17,33 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // (Saldo insuficiente, CPF já cadastrado, etc)
+    @ExceptionHandler(FinanceDomainException.class)
+    public ResponseEntity<ErrorResponse> handleFinanceDomain(FinanceDomainException ex) {
+        log.warn("Finance Domain Violation: {} [Code: {}]", ex.getMessage(), ex.getCode());
+
+        // Aqui está a mágica: Traduzimos o código interno para o status do Front
+        HttpStatus status = switch (ex.getCode()) {
+            case "FIN-001" -> HttpStatus.UNPROCESSABLE_CONTENT; // Saldo insuficiente (422)
+            case "FIN-002" -> HttpStatus.FORBIDDEN;              // Wallet Bloqueada (403)
+            case "FIN-003" -> HttpStatus.BAD_REQUEST;            // Moeda incompatível (400)
+            case "FIN-504" -> HttpStatus.GATEWAY_TIMEOUT;        // Timeout (504)
+            default -> HttpStatus.BAD_REQUEST;                   // Erro genérico (400)
+        };
+
+        var response = new ErrorResponse(ex.getCode(), ex.getMessage());
+        return ResponseEntity.status(status).body(response);
+    }
+
+    // Handler para as outras BusinessExceptions que já trazem o status (como a de Integração)
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> handleBusiness(BusinessException ex) {
-        log.warn("Business error: {} [Code: {}]", ex.getMessage(), ex.getCode());
+        log.error("Business Error: {} [Code: {}]", ex.getMessage(), ex.getCode());
+
         var response = new ErrorResponse(ex.getCode(), ex.getMessage());
-        return ResponseEntity.status(ex.getStatus()).body(response);
+        // Se o status for null, caímos em um fallback seguro (ex: 400)
+        HttpStatus status = ex.getStatus() != null ? ex.getStatus() : HttpStatus.BAD_REQUEST;
+
+        return ResponseEntity.status(status).body(response);
     }
 
     // (@Valid, @NotNull, etc)
