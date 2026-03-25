@@ -10,4 +10,8 @@ public class FinanceDomainException extends BusinessException {
     public FinanceDomainException(String message) {
         super(message, FinanceErrorCode.DOMAIN_ERROR.getValue(), null);
     }
+
+    public FinanceDomainException(String message, String code) {
+        super(message, code, null);
+    }
 }

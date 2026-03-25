@@ -35,4 +35,5 @@ public record Money(BigDecimal amount) {
     public Money add(Money other) {
         return new Money(this.amount.add(other.amount));
     }
+    public Money multiply(double factor) {return new Money(this.amount.multiply(BigDecimal.valueOf(factor)));}
 }

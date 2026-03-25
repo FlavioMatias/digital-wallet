@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "wallets")
 @Getter @Setter
@@ -34,6 +36,9 @@ public class Wallet extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private WalletStatus status;
+
+    @Column(name = "owner_id")
+    private UUID owner;
 
     public void deposit(Money amount) {
         if (this.status != WalletStatus.ACTIVE) {
