@@ -1,11 +1,12 @@
 package api.digital_wallet.modules.finance.domain.service;
 
 import api.digital_wallet.modules.finance.domain.enums.CurrencyType;
+import api.digital_wallet.modules.finance.domain.port.service.ExchangeServicePort;
 import api.digital_wallet.shared.value.Money;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExchangeService {
+public class ExchangeService implements ExchangeServicePort {
 
     public Money convert(Money amount, CurrencyType from, CurrencyType to) {
         if (from == to) return amount;
@@ -14,7 +15,7 @@ public class ExchangeService {
         return amount.multiply(rate);
     }
 
-    public double getRate(CurrencyType from, CurrencyType to) {
+    private double getRate(CurrencyType from, CurrencyType to) {
         return to.getFactor() / from.getFactor();
     }
 }

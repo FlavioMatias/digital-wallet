@@ -53,11 +53,18 @@ public class Transaction extends BaseEntity {
         this.status = TransactionStatus.COMPLETED;
     }
 
-    public void fail(String reason) {
+    public void fail() {
         if (this.isFinalState()) {
             throw new FinanceDomainException("Cannot fail a transaction that is already in a final state", "INVALID_STATE_TRANSITION");
         }
         this.status = TransactionStatus.FAILED;
+    }
+
+    public void cancel() {
+        if (this.isFinalState()) {
+            throw new FinanceDomainException("Cannot cancel a transaction that is already in a final state", "INVALID_STATE_TRANSITION");
+        }
+        this.status = TransactionStatus.CANCELLED;
     }
 
     private boolean isFinalState() {

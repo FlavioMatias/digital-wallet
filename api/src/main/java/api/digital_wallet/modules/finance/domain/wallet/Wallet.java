@@ -89,4 +89,5 @@ public class Wallet extends BaseEntity {
         this.blockedBalance = this.blockedBalance.subtract(amount);
         this.availableBalance = this.availableBalance.add(amount);
     }
+
 }
