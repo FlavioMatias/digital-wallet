@@ -1,32 +1,23 @@
 package api.digital_wallet.modules.finance.application.service.transfer;
 
 import api.digital_wallet.modules.finance.application.cmd.TransferCmd;
-import api.digital_wallet.modules.finance.application.service.wallet.WalletService;
+
 import api.digital_wallet.modules.finance.application.usecase.TransferUseCase;
 import api.digital_wallet.modules.finance.domain.port.repository.TransactionRepositoryPort;
 import api.digital_wallet.modules.finance.domain.port.repository.WalletRepositoryPort;
 import api.digital_wallet.modules.finance.domain.port.service.ExchangeServicePort;
 import api.digital_wallet.modules.finance.domain.port.service.TransferServicePort;
 import api.digital_wallet.modules.finance.domain.port.transfer.TransferAuthorization;
-import api.digital_wallet.modules.finance.domain.service.ExchangeService;
 import api.digital_wallet.modules.finance.domain.transaction.Transaction;
 import api.digital_wallet.modules.finance.domain.transaction.TransactionBuilder;
 import api.digital_wallet.modules.finance.domain.transaction.TransactionPair;
 import api.digital_wallet.modules.finance.domain.transaction.event.TransactionCreatedEvent;
-import api.digital_wallet.modules.finance.domain.wallet.Wallet;
 import api.digital_wallet.modules.finance.exception.FinanceDomainException;
 import api.digital_wallet.modules.finance.exception.FinanceErrorCode;
-import api.digital_wallet.modules.finance.infra.gateway.TransferAuthorizationGateway;
-import api.digital_wallet.modules.finance.infra.repository.TransactionRepository;
-import api.digital_wallet.shared.outbox.OutboxRepository;
-import api.digital_wallet.shared.outbox.OutboxService;
 import api.digital_wallet.shared.outbox.OutboxServicePort;
-import api.digital_wallet.shared.value.Money;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor

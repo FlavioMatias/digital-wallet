@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum CurrencyType {
-    BRL(5.20),
+    BRL(5.00),
     USD(1.00),
     EUR(0.92);
 
