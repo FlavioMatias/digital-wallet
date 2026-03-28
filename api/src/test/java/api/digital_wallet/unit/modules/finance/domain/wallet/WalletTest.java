@@ -1,6 +1,7 @@
 package api.digital_wallet.unit.modules.finance.domain.wallet;
 
 import api.digital_wallet.modules.finance.domain.enums.CurrencyType;
+import api.digital_wallet.modules.finance.domain.wallet.Wallet;
 import api.digital_wallet.modules.finance.domain.wallet.enums.WalletStatus;
 import api.digital_wallet.modules.finance.exception.FinanceDomainException;
 import api.digital_wallet.modules.finance.exception.FinanceErrorCode;
