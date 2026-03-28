@@ -5,6 +5,7 @@ import api.digital_wallet.modules.finance.domain.transaction.enums.TransactionSt
 import api.digital_wallet.modules.finance.domain.transaction.enums.TransactionType;
 import api.digital_wallet.modules.finance.domain.wallet.Wallet;
 import api.digital_wallet.modules.finance.exception.FinanceDomainException;
+import api.digital_wallet.modules.finance.exception.FinanceErrorCode;
 import api.digital_wallet.shared.domain.BaseEntity;
 import api.digital_wallet.shared.value.Money;
 import api.digital_wallet.shared.value.converter.MoneyConverter;
@@ -41,28 +42,28 @@ public class Transaction extends BaseEntity {
 
     public void authorize() {
         if (this.status != TransactionStatus.PENDING) {
-            throw new FinanceDomainException("Only pending transactions can be authorized", "INVALID_STATE_TRANSITION");
+            throw new FinanceDomainException("Only pending transactions can be authorized", FinanceErrorCode.INVALID_STATE_TRANSITION);
         }
         this.status = TransactionStatus.AUTHORIZED;
     }
 
     public void complete() {
         if (this.status != TransactionStatus.AUTHORIZED && this.status != TransactionStatus.PENDING) {
-            throw new FinanceDomainException("Transaction must be authorized or pending to be completed", "INVALID_STATE_TRANSITION");
+            throw new FinanceDomainException("Transaction must be authorized or pending to be completed", FinanceErrorCode.INVALID_STATE_TRANSITION);
         }
         this.status = TransactionStatus.COMPLETED;
     }
 
     public void fail() {
         if (this.isFinalState()) {
-            throw new FinanceDomainException("Cannot fail a transaction that is already in a final state", "INVALID_STATE_TRANSITION");
+            throw new FinanceDomainException("Cannot fail a transaction that is already in a final state", FinanceErrorCode.INVALID_STATE_TRANSITION);
         }
         this.status = TransactionStatus.FAILED;
     }
 
     public void cancel() {
         if (this.isFinalState()) {
-            throw new FinanceDomainException("Cannot cancel a transaction that is already in a final state", "INVALID_STATE_TRANSITION");
+            throw new FinanceDomainException("Cannot cancel a transaction that is already in a final state", FinanceErrorCode.INVALID_STATE_TRANSITION);
         }
         this.status = TransactionStatus.CANCELLED;
     }
