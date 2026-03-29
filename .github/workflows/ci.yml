@@ -22,7 +22,7 @@ jobs:
         cache: gradle 
         
     - name: Make gradlew executable
-      run: chmod +x api/gradlew+
+      run: chmod +x api/gradlew
 
     - name: Build and Run Unit Testsi
       run: ./gradlew clean test
