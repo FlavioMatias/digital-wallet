@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI with Gradle
 
 on:
   push:
@@ -19,14 +19,18 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: maven
+        cache: gradle 
+        
+    - name: Make gradlew executable
+      run: chmod +x api/gradlew+
 
-    - name: Build and Run Unit Tests
-      run: mvn clean test
+    - name: Build and Run Unit Testsi
+      run: ./gradlew clean test
+      working-directory: api 
 
     - name: Generate Test Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: target/surefire-reports/
+        path: api/build/test-results/test/
