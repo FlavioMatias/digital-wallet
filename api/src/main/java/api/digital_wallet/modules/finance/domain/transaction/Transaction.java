@@ -31,7 +31,8 @@ public class Transaction extends BaseEntity {
 
     private UUID correlationId;
 
-    @Column(name = "wallet_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
     @Enumerated(EnumType.STRING)
