@@ -1,7 +1,11 @@
 spring:
   application:
     name: digital-wallet
-
+  main:
+    banner-mode: console
+  output:
+    ansi:
+      enabled: ALWAYS
   datasource:
     url: jdbc:postgresql://localhost:5432/dwdb
     username: admin
@@ -44,14 +48,14 @@ spring:
   docker:
     compose:
       enabled: true
-      file: ./docker/docker-compose.yml
+      file: ../docker/docker-compose.yml
 
 logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr([%15.15X{correlationId}]){magenta} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p --- [%X{correlationId}] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
   level:
-    root: INFO
+    root: WARN
     api.digital_wallet: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.results: TRACE
