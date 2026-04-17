@@ -1,6 +1,9 @@
-# Digital Wallet
+{{ EM DESENVOLVIMENTO }}
 
-## 📌 Sobre o Projeto
+<img width="1840" height="570" alt="banner" src="https://github.com/user-attachments/assets/e6aa83a3-14e0-426d-a136-3360672ebbe7" />
+
+
+## Sobre o Projeto
 
 Este sistema é uma plataforma de pagamentos simplificada que permite a transferência de valores entre usuários. O foco principal é a **consistência financeira**, garantindo que as operações de débito e crédito sejam atômicas, seguras e validadas por serviços externos.
 
@@ -11,7 +14,7 @@ O projeto foi desenhado sob os princípios de **Invariantes de Negócio**, asseg
 
 O projeto utiliza uma **Arquitetura Modular e Orientada a Eventos (ADR 001)** para garantir o desacoplamento entre os domínios de Identidade, Finanças e Notificações.
 
-## 📄 Decisões Arquiteturais (ADRs)
+## Decisões Arquiteturais (ADRs)
 
 Para entender o "porquê" das nossas escolhas técnicas, acesse nossa pasta de **[Architecture Decision Records]()**.
 
@@ -20,8 +23,8 @@ Para entender o "porquê" das nossas escolhas técnicas, acesse nossa pasta de *
 
   * **Linguagem:** Java
   * **Banco de Dados:** Postgres para garantir transações ACID.
-  * **Comunicação:** Assíncrona para notificações de terceiros.
-  * **Segurança:** Hashing de senhas (BCrypt) e Blindagem de PII.
+  * **Comunicação:** Assíncrona com RabbitMQ.
+  * **Segurança:** Hashing de senhas (BCrypt) e Blindagem de PII.(ta faltando ainda)
 
 
 ## 🛠️ Regras de Negócio (Destaques)
