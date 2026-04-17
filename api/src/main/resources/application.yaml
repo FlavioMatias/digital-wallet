@@ -28,6 +28,13 @@ spring:
     port: 5672
     username: admin
     password: admin
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 2000ms
+        default-requeue-rejected: false
 
   data:
     redis:
