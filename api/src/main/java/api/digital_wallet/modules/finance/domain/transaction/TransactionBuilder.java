@@ -12,13 +12,14 @@ import java.util.UUID;
 
 public class TransactionBuilder {
 
-    private final ExchangeService exchangeService;
     private Wallet origin;
     private Wallet destination;
     private Money amount;
+    private Money convertedAmount;
 
-    public TransactionBuilder(ExchangeService exchangeService) {
-        this.exchangeService = exchangeService;
+    public TransactionBuilder convertedAmount(Money convertedAmount) {
+        this.convertedAmount = convertedAmount;
+        return this;
     }
 
     public TransactionBuilder from(Wallet origin) {
@@ -49,14 +50,6 @@ public class TransactionBuilder {
                 TransactionType.DEBIT,
                 TransactionStatus.PENDING
         );
-
-        // Cálculo do Câmbio
-        Money convertedAmount = exchangeService.convert(
-                amount,
-                origin.getCurrency(),
-                destination.getCurrency()
-        );
-
 
         Transaction credit = new Transaction(
                 convertedAmount,

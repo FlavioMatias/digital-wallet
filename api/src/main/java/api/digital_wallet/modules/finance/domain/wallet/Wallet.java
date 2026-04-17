@@ -38,7 +38,7 @@ public class Wallet extends BaseEntity {
     private WalletStatus status;
 
     @Column(name = "owner_id")
-    private UUID owner;
+    private UUID ownerId;
 
     public void deposit(Money amount) {
         if (this.status != WalletStatus.ACTIVE) {
@@ -89,4 +89,5 @@ public class Wallet extends BaseEntity {
         this.blockedBalance = this.blockedBalance.subtract(amount);
         this.availableBalance = this.availableBalance.add(amount);
     }
+
 }
