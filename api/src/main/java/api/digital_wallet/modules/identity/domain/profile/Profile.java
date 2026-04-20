@@ -17,10 +17,10 @@ import lombok.Setter;
 @AllArgsConstructor @NoArgsConstructor
 public class Profile extends BaseEntity {
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Convert(converter = DocumentConverter.class)
@@ -32,5 +32,6 @@ public class Profile extends BaseEntity {
     private ProfileType role;
 
     @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }
