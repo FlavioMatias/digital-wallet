@@ -14,7 +14,4 @@ public interface WalletRepositoryPort {
 
     Wallet save(Wallet wallet);
 
-    List<Wallet> saveAll(List<Wallet> wallets);
-
-
 }

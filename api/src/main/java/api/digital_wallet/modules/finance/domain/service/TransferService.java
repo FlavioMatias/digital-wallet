@@ -5,7 +5,9 @@ import api.digital_wallet.modules.finance.domain.transaction.TransactionPair;
 import api.digital_wallet.modules.finance.domain.wallet.Wallet;
 import api.digital_wallet.modules.finance.exception.FinanceDomainException;
 import api.digital_wallet.modules.finance.exception.FinanceErrorCode;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TransferService implements TransferServicePort {
 
     @Override

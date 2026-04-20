@@ -8,5 +8,5 @@ public interface TransactionRepositoryPort {
 
     Transaction save(Transaction transaction);
 
-    void saveAll(List<Transaction> transactions);
+    <S extends Transaction> List<S> saveAll(Iterable<S> transactions);
 }
