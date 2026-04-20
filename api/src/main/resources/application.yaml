@@ -53,12 +53,11 @@ logging:
   level:
     root: INFO
     api.digital_wallet: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.orm.results: TRACE
+    org.hibernate.SQL: INFO
     org.springframework.web: INFO
     org.springframework.amqp: INFO
   file:
-    name: logs/vaultpay.log
+    name: logs/digital_wallet.log
   logback:
     rollingpolicy:
       max-file-size: 10MB
