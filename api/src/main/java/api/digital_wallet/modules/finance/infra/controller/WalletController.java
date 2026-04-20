@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/wallets")
+@RequestMapping("/api/v1/wallet")
 public class WalletController {
 
     private final WalletUserCase walletUserCase;
@@ -18,7 +18,7 @@ public class WalletController {
         this.walletUserCase = walletUserCase;
     }
 
-    @GetMapping("/user/{ownerId}")
+    @GetMapping("/{ownerId}")
     public ResponseEntity<List<WalletResponseDTO>> listByOwner(@PathVariable UUID ownerId) {
 
         List<WalletResponseDTO> wallets = walletUserCase.findAllByOwnerId(ownerId)
