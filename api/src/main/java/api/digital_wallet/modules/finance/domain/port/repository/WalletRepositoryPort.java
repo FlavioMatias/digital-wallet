@@ -14,4 +14,6 @@ public interface WalletRepositoryPort {
 
     Wallet save(Wallet wallet);
 
+    List<Wallet> findAllByOwnerId(UUID ownerId);
+
 }

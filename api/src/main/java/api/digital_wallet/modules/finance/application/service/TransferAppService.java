@@ -1,4 +1,4 @@
-package api.digital_wallet.modules.finance.application.service.transfer;
+package api.digital_wallet.modules.finance.application.service;
 
 import api.digital_wallet.modules.finance.application.cmd.TransferCmd;
 

@@ -1,7 +1,7 @@
 package api.digital_wallet.unit.modules.finance.application.service.transfer;
 
 import api.digital_wallet.modules.finance.application.cmd.TransferCmd;
-import api.digital_wallet.modules.finance.application.service.transfer.TransferAppService;
+import api.digital_wallet.modules.finance.application.service.TransferAppService;
 import api.digital_wallet.modules.finance.domain.enums.CurrencyType;
 import api.digital_wallet.modules.finance.domain.port.repository.TransactionRepositoryPort;
 import api.digital_wallet.modules.finance.domain.port.repository.WalletRepositoryPort;

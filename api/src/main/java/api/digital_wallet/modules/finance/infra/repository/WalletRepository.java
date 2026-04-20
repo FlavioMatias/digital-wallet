@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,5 +18,6 @@ public interface WalletRepository extends JpaRepository<Wallet, UUID>, WalletRep
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT w FROM Wallet w WHERE w.ownerId = :ownerId")
     Optional<Wallet> findByOwnerIdWithLock(UUID ownerId);
+
 
 }
