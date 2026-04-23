@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
         // Aqui está a mágica: Traduzimos o código interno para o status do Front
         HttpStatus status = switch (ex.getCode()) {
-            case "FIN-001" -> HttpStatus.UNPROCESSABLE_CONTENT; // Saldo insuficiente (422)
+            case "FIN-001" -> HttpStatus.UNPROCESSABLE_ENTITY; // Saldo insuficiente (422)
             case "FIN-002" -> HttpStatus.FORBIDDEN;              // Wallet Bloqueada (403)
             case "FIN-003" -> HttpStatus.BAD_REQUEST;            // Moeda incompatível (400)
             case "FIN-504" -> HttpStatus.GATEWAY_TIMEOUT;        // Timeout (504)

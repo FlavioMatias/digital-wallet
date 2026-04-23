@@ -1,9 +1,8 @@
 plugins {
-	java
-	id("org.springframework.boot") version "4.0.4"
+	id("org.springframework.boot") version "3.4.5"
 	id("io.spring.dependency-management") version "1.1.7"
+	java
 }
-
 group = "api"
 version = "0.0.1-SNAPSHOT"
 
@@ -26,8 +25,7 @@ repositories {
 dependencies {
 	// Web & Docs
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
-
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
 	// Mensageria (RabbitMQ)
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 

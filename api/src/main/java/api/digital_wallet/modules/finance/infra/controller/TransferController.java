@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/transfers")
+@RequestMapping("/v1/transfer")
 @RequiredArgsConstructor
 @Tag(name = "Transfers", description = "Endpoints para movimentações financeiras")
 public class TransferController {
