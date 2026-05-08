@@ -5,12 +5,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -46,7 +50,11 @@ public class OutboxService implements OutboxServicePort {
 
         for (OutboxEvent event : events) {
             try {
-                rabbitTemplate.convertAndSend(event.getAggregateType(), event.getEventType(), event.getPayload());
+                Message message = MessageBuilder
+                        .withBody(event.getPayload().getBytes(StandardCharsets.UTF_8))
+                        .setContentType(MessageProperties.CONTENT_TYPE_JSON)
+                        .build();
+                rabbitTemplate.send(event.getAggregateType(), event.getEventType(), message);
 
                 event.markAsProcessed();
                 outboxRepository.save(event);
