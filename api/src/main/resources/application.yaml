@@ -50,6 +50,11 @@ spring:
       enabled: true
       file: ../docker/docker-compose.yml
 
+auth:
+  jwt:
+    secret: strong_sufficient_password_for_this_project_it_is_just_a_portfolio
+    expiration: 3600000
+
 logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr([%15.15X{correlationId}]){magenta} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
